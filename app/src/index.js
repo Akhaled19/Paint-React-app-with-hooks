@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Playground from './Playground';
+import App from '../src/container/index';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Playground />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
