@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Name from './Name';
 import ColorPicker from './ColorPicker'
 import randomColor from 'randomcolor';
+import WindowSize from './WindowSize';
 
 export default function Paint() {
     const [colors, setColors] = useState([]);
@@ -32,6 +33,7 @@ export default function Paint() {
               />
             </div>
           </header>
+          <WindowSize />
         </div>
     )
 }
