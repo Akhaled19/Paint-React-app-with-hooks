@@ -19,17 +19,19 @@ export default function Paint() {
     useEffect(getColors, [])
     
     return (
-        <header style={{borderTop: `10px soild ${activeColor}`}}>
-            <div className="app">
-                <Name />
+        <div className="app">
+          <header style={{ borderTop: `10px solid ${activeColor}` }}>
+            <div>
+              <Name />
             </div>
             <div style={{ marginTop: 10 }}>
-                <ColorPicker 
-                    colors={colors}
-                    activeColor={activeColor}
-                    setActiveColor={setActiveColor}
-                />
+              <ColorPicker
+                colors={colors}
+                activeColor={activeColor}
+                setActiveColor={setActiveColor}
+              />
             </div>
-        </header>
+          </header>
+        </div>
     )
 }
