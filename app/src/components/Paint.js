@@ -3,7 +3,7 @@ import Name from './Name';
 import ColorPicker from './ColorPicker'
 import RefreshButton from './RefreshButton';
 import randomColor from 'randomcolor';
-import WindowSize from './WindowSize';
+import useWindowSize from './WindowSize';
 import Canvas from './Canvas';
 
 
@@ -22,9 +22,17 @@ export default function Paint() {
                 setColors(res.colors.map(color => color.hex.value))
                 setActiveColor(res.colors[0].hex.value)
             })
-    }, [])
+    }, []);
 
-    useEffect(getColors, [])
+    useEffect(getColors, []);
+
+    const [visible, setVisible] = useState(false);
+    let timeoutId = useRef();
+    const [windowWidth, windowHeight] = useWindowSize(() => {
+      setVisible(true);
+      clearTimeout(timeoutId.current);
+      timeoutId.current = setTimeout(() => setVisible(false), 500)
+    });
     
     return (
         <div className="app">
@@ -44,10 +52,12 @@ export default function Paint() {
           {activeColor && (
             <Canvas 
               color={activeColor}
-              height={window.innerHeight - headerRef.current.offsetHight}
+              height={window.innerHeight}
             />
           )}
-          <WindowSize />
+          <div className={`window-size ${visible ? '' : 'hidden'}`}>
+            {windowWidth} X {windowHeight}
+          </div>
         </div>
     )
 }
