@@ -61,6 +61,16 @@ The array destructuring syntax let's us destruct these values out. To update the
 ```
 setState({... count: prevState.count + 1})
 ```
+### useEffect Hook
+*useEffect* hook adds the ability to preform side effects from a function component. It does what life cycle methods from mounting, updating, to make the side effect when our resource type changes, but unified into a single API. 
+The *useEffect* hook will run every time we update our state, it will re-render and this useEffect will run.
+
+The *useEffect* It is a function and takes two arguments - a setState function and an array of dependencies to prevent *useEffect* from running in an infinite loop.
+Here is a trick - if you only want to apply the *useEffect* on mount, then you would leave the second argument the array of dependencies empty.
+
+**Clean up:**
+Effects may also optionally specify how to "clean up" after them by returning a function - whatever we return that's what React will consider as the thing that needs to run whenever you tell it to clean up or run this effect again. For instance, inside the retun function we could remove the event.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
