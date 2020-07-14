@@ -44,7 +44,7 @@ export default function useWindowSize(cb) {
 ```
 As you can see above, the built-in React Hooks like *useState* and *useEffect* serve as the basic building blocks. We can use them from our components directly, or we can combine them into custom Hooks like *useWindowSize*. 
 
-### useState 
+### useState Hook
 *useState* is the most basic and most used Hook. It is perfect for updating elements such as a name, number, list etc., where the user is constantly adding, updating, and deleting. It is a function and it always returns an array of values - the current state value and a funcion that lets you update it.
 
 Every time the setstate function is called, it’s going to re-render our component with the new value for our state. Every time this happens the intial value get called every single time. Thus, this will slow down the performane of our application. To prevent the intial value from getting called with every render, we use a function to pass in the state to the *useState* Hook. 
@@ -70,6 +70,32 @@ Here is a trick - if you only want to apply the *useEffect* on mount, then you w
 
 **Clean up:**
 Effects may also optionally specify how to "clean up" after them by returning a function - whatever we return that's what React will consider as the thing that needs to run whenever you tell it to clean up or run this effect again. For instance, inside the retun function we could remove the event.
+
+
+### useRef Hook
+*useRef* is presistent between renders. It can be used to access the DOM element and access a value that is the same between between renders. *useRef* Hooks takes an intial value just like *useState* Hook. Unless you want to get access to an element then you would leave the intial state empty. Otherwise, pass in an intial value to the object's property -  we do this because it simplifies accessing the value without if checks.
+```
+stateRef.current.property
+```
+
+To use *useRef*, we need to first place a ref on the element. Ref takes an object, stateRef object variable - which you need to declare outside the ref, with useRef hook.  
+
+```
+export default function Playground() {
+  const [count, setCount] = useState(1);
+  const inputRef = useRef();
+  
+  useEffect(() => inputRef.current.focus(), [count]);
+  
+  return (
+    <div> 
+      <button onClick={() => setCount(currentCount => currentCount - 1}>-</button>
+      <button onClick={() => setCount(currentCount => currentCount + 1)}>+</button>
+      <input ref={inputRef} type="range" onChange={e => setCount(e.target.value)} value={count} />
+    </div>
+  )
+}
+```
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
